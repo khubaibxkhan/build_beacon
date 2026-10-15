@@ -1,0 +1,3 @@
+import {z} from 'zod';
+export const eventSchema=z.object({title:z.string().trim().min(5).max(120),description:z.string().trim().min(15).max(3000),category:z.enum(['Hackathon','Workshop','Competition','Internship','Scholarship','Event']),date:z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(v=>!Number.isNaN(Date.parse(v)),'Invalid date'),location:z.string().trim().min(2).max(120),organizer:z.string().trim().min(2).max(100),link:z.string().url().refine(v=>/^https:\/\//.test(v),'HTTPS link required'),featured:z.boolean().default(false),published:z.boolean().default(true)});
+export type EventInput=z.infer<typeof eventSchema>;export type CampusEvent=EventInput&{id:string};

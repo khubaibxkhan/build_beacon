@@ -1,0 +1,1 @@
+import Admin from '../../components/admin';import {isAdmin} from '../../lib/auth';import {allEvents} from '../../lib/store';export const dynamic='force-dynamic';export default async function Page(){const authorized=await isAdmin();return <Admin authorized={authorized} initialEvents={authorized?await allEvents():[]}/>}
